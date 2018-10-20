@@ -6,13 +6,13 @@ The script attempts to tidy up the file before it starts working, but it is only
 ### So far, these are the variations in usernames that are possible:
 
 Output options:
-1	john.doe
-2	j.doe
-3	johndoe
-4	jdoe
-5	doe.john
-6	doe.j
-7	doejohn
-8	djohn
+1.	john.doe
+2.	j.doe
+3.	johndoe
+4.	jdoe
+5.	doe.john
+6.	doe.j
+7.	doejohn
+8.	djohn
 
 

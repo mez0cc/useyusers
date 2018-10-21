@@ -19,7 +19,7 @@ parser.add_argument("-o", "--output", metavar="", help="file to output to")
 parser.add_argument('--version', action='version', version='%(prog)s 0.1')
 args = parser.parse_args()
 
-AUTHOR="Brandon McGrath"
+AUTHOR="Mez0"
 
 NAMES=args.input #reference to a file
 DOMAIN=args.domain
@@ -28,25 +28,28 @@ RAW_FILE = open(NAMES, "r")#contents of the file
 OUTPUT_FILE=""
 NAMES_FILE=[]
 
-
 def cleanup():
-	tmp = []
-	lines_seen = set()
+	try:
+		tmp = []
+		lines_seen = set()
 
-	for line in RAW_FILE:
-		if len(line) > 1:
-			x = re.sub(r'[!\"£$%^&*()_+-=\[\]{}#\';/.,<>?:@~]', '', line).strip().lower()
-			# if (len(x.split())) < 3:
-			f = x.split()[0]
-			s = x.split()[1]
-			name = f + " " + s
-			tmp.append(name)
-			for new_line in tmp:
-				if new_line not in lines_seen:
-					NAMES_FILE.append(new_line)
-					lines_seen.add(new_line)
-	NAMES_FILE.sort()					
-	RAW_FILE.close()					
+		for line in RAW_FILE:
+			if len(line) > 1:
+				x = re.sub(r'[!\"£$%^&*()_+-=\[\]{}#\';/.,<>?:@~]', '', line).strip().lower()
+				f = x.split()[0]
+				s = x.split()[1]
+				name = f + " " + s
+				tmp.append(name)
+				for new_line in tmp:
+					if new_line not in lines_seen:
+						NAMES_FILE.append(new_line)
+						lines_seen.add(new_line)
+
+		NAMES_FILE.sort()					
+		RAW_FILE.close()
+
+	except IndexError:
+		pass						
 
 def first_dot_second():
 #1. first.second

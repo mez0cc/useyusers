@@ -32,14 +32,20 @@ NAMES_FILE=[]
 def cleanup():
 	tmp = []
 	lines_seen = set()
+
 	for line in RAW_FILE:
-		x = re.sub(r'[!\"£$%^&*()_+-=\[\]{}#\';/.,<>?:@~]', '', line).strip().lower() #replace special characters with nothing and then remove spaces (also converts to lower)
-		if len(x) != 0: # check if the regex'd string is NOT equal to 0 (0 meaning the line is empty)
-			tmp.append(x) #appending the formatted line to [tmp]
+		if len(line) > 1:
+			x = re.sub(r'[!\"£$%^&*()_+-=\[\]{}#\';/.,<>?:@~]', '', line).strip().lower()
+			# if (len(x.split())) < 3:
+			f = x.split()[0]
+			s = x.split()[1]
+			name = f + " " + s
+			tmp.append(name)
 			for new_line in tmp:
-				if new_line not in lines_seen: #checking if the line in the tmp array has been previous seen, if it has; remove it.
+				if new_line not in lines_seen:
 					NAMES_FILE.append(new_line)
 					lines_seen.add(new_line)
+	NAMES_FILE.sort()					
 	RAW_FILE.close()					
 
 def first_dot_second():

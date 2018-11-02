@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 # -*- coding: utf-8 -*-
 
 import argparse, textwrap, re
@@ -27,7 +28,12 @@ NAMES=args.input #reference to a file
 DOMAIN=args.domain
 
 RAW_FILE = open(NAMES, "r")#contents of the file
-OUTPUT_FILE=""
+
+if args.output: #if args.output is used, open it.
+	OUTPUT_FILE = open(args.output,"w")
+else:
+	pass
+
 NAMES_FILE=[]
 
 def cleanup():
@@ -38,20 +44,27 @@ def cleanup():
 		for line in RAW_FILE:
 			if len(line) > 1:
 				x = re.sub(r'[!\"£$%^&*()_+-=\[\]{}#\';/.,<>?:@~]', '', line).strip().lower()
-				f = x.split()[0]
-				s = x.split()[1]
-				name = f + " " + s
-				tmp.append(name)
-				for new_line in tmp:
-					if new_line not in lines_seen:
-						NAMES_FILE.append(new_line)
-						lines_seen.add(new_line)
+				if (len(x.split())) == 2:
+					f = x.split()[0]
+					s = x.split()[1]
+					name = f + " " + s
+					tmp.append(name)
+					for new_line in tmp:
+						if new_line not in lines_seen:
+							NAMES_FILE.append(new_line)
+							lines_seen.add(new_line)
+				else:
+					pass
 
 		NAMES_FILE.sort()					
 		RAW_FILE.close()
 
 	except IndexError:
 		pass						
+
+def test():
+	if args.output:
+		OUTPUT_FILE.write('hello world')
 
 def first_dot_second():
 #1. first.second
@@ -65,7 +78,7 @@ def first_dot_second():
 			username = ("{}.{}".format(first,second))
 			print (username)
 		if args.output:
-			OUTPUT_FILE.write(username +"\n")
+			OUTPUT_FILE.write(username + "\n")
 
 def f_dot_second():
 #2. f.second
@@ -78,8 +91,8 @@ def f_dot_second():
 		else:
 			username = ("{}.{}".format(first,second))
 			print (username)
-	if args.output:
-		OUTPUT_FILE.write(username +"\n")	        
+		if args.output:
+			OUTPUT_FILE.write(username +"\n")	        
 
 def firstsecond():
 	#3. firstsecond
@@ -92,8 +105,8 @@ def firstsecond():
 		else:
 			username = ("{}{}".format(first,second))
 			print (username)
-	if args.output:
-		OUTPUT_FILE.write(username +"\n")	   	
+		if args.output:
+			OUTPUT_FILE.write(username +"\n")	   	
 
 def fsecond():
 	#4. fsecond
@@ -106,9 +119,8 @@ def fsecond():
 		else:
 			username = ("{}{}".format(first,second))
 			print (username)
-	if args.output:
-		OUTPUT_FILE.write(username +"\n")	  	
-
+		if args.output:
+			OUTPUT_FILE.write(username +"\n")	  	
 
 def second_dot_first():
 	#5. second.first
@@ -121,8 +133,8 @@ def second_dot_first():
 		else:
 			username = ("{}.{}".format(second,first))
 			print (username)
-	if args.output:
-		OUTPUT_FILE.write(username +"\n")	  		
+		if args.output:
+			OUTPUT_FILE.write(username +"\n")	  		
 
 def s_dot_first():
 	#6. s.first
@@ -135,8 +147,8 @@ def s_dot_first():
 		else:
 			username = ("{}.{}".format(second,first))
 			print (username)
-	if args.output:
-		OUTPUT_FILE.write(username +"\n")	
+		if args.output:
+			OUTPUT_FILE.write(username +"\n")	
 
 def secondfirst():
 	#7. secondfirst
@@ -149,8 +161,8 @@ def secondfirst():
 		else:
 			username = ("{}{}".format(second,first))
 			print (username)
-	if args.output:
-		OUTPUT_FILE.write(username +"\n")	
+		if args.output:
+			OUTPUT_FILE.write(username +"\n")	
 
 def sfirst():
 	#8. sfirst
@@ -163,15 +175,12 @@ def sfirst():
 		else:
 			username = ("{}{}".format(second,first))
 			print (username)
-	if args.output:
-		OUTPUT_FILE.write(username +"\n")			
+		if args.output:
+			OUTPUT_FILE.write(username +"\n")			
 
 cleanup()
 
-if args.output:
-	OUTPUT_FILE=open(args.output, "w")
-
-elif args.style == "1":
+if args.style == "1":
 	first_dot_second()
 
 elif args.style == "2":

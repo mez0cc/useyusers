@@ -62,10 +62,6 @@ def cleanup():
 	except IndexError:
 		pass						
 
-def test():
-	if args.output:
-		OUTPUT_FILE.write('hello world')
-
 def first_dot_second():
 #1. first.second
 	for i in NAMES_FILE:

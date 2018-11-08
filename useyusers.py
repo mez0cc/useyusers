@@ -14,6 +14,7 @@ parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpForm
 	6\tdoe.j
 	7\tdoejohn
 	8\tdjohn
+	9\tPrint all of the above
 	'''),epilog="Example: useyusers.py -d example.com -s 1\nOutput: john.doe@example.com\nThe cleaner your input file; the easier this will work!")
 parser.add_argument("-d", "--domain", type=str, metavar="",help="Domain to append to the username")
 parser.add_argument("-i", "--input", required=True, type=str, metavar="", help="The input file that useyusers will read from")
@@ -172,7 +173,18 @@ def sfirst():
 			username = ("{}{}".format(second,first))
 			print (username)
 		if args.output:
-			OUTPUT_FILE.write(username +"\n")			
+			OUTPUT_FILE.write(username +"\n")
+			
+def print_all():
+	#9 Print all outputs
+	first_dot_second()
+	f_dot_second()
+	firstsecond()	
+	fsecond()
+	second_dot_first()
+	s_dot_first()	
+	secondfirst()
+	sfirst()
 
 cleanup()
 
@@ -199,6 +211,9 @@ elif args.style == "7":
 
 elif args.style == "8":
 	sfirst()
+
+elif args.style == "9":
+	print_all()
 
 if args.output:
 	OUTPUT_FILE.close()
